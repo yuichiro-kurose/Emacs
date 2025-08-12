@@ -1,0 +1,100 @@
+#+TITLE: Yuichiro's GNU Emacs Config
+#+AUTHOR: Yuichiro Kurose
+#+DESCRIPTION: Yuichiro's personal Emacs config.
+#+STARTUP: showeverything
+#+OPTIONS: toc:2
+
+* TABLE OF CONTENTS :toc:
+- [[#package-management][PACKAGE MANAGEMENT]]
+  - [[#configure-package-archives][Configure Package Archives]]
+- [[#core-emacs-settings][CORE EMACS SETTINGS]]
+  - [[#graphical-user-interface][Graphical User Interface]]
+  - [[#line-numbers][Line Numbers]]
+  - [[#font][Font]]
+  - [[#indentation][Indentation]]
+- [[#file-handling][FILE HANDLING]]
+  - [[#disable-auto-save-and-backup][Disable Auto-save and Backup]]
+- [[#package-configurations][PACKAGE CONFIGURATIONS]]
+  - [[#org-mode][Org Mode]]
+  - [[#gruvbox-theme][Gruvbox Theme]]
+  - [[#vterm][Vterm]]
+  - [[#yasnippet][Yasnippet]]
+
+* PACKAGE MANAGEMENT
+** Configure Package Archives
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-archives
+        '(("gnu"   . "https://elpa.gnu.org/packages/")
+          ("melpa" . "https://melpa.org/packages/")))
+  (package-initialize)
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (require 'use-package)
+  (setq use-package-always-ensure t)
+#+END_SRC
+
+* CORE EMACS SETTINGS
+** Graphical User Interface
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+#+END_SRC
+
+** Line Numbers
+#+BEGIN_SRC emacs-lisp
+  (global-display-line-numbers-mode 1)
+#+END_SRC
+
+** Font
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'default nil
+                      :family "JetBrains Mono"
+                      :height 140)
+#+END_SRC
+
+** Indentation
+#+BEGIN_SRC emacs-lisp
+  (setq-default tab-width 2)
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
+
+* FILE HANDLING
+** Disable Auto-save and Backup
+#+BEGIN_SRC emacs-lisp
+  (setq auto-save-default nil)
+  (setq make-backup-files nil)
+#+END_SRC
+
+* PACKAGE CONFIGURATIONS
+** Org Mode
+#+BEGIN_SRC emacs-lisp
+  (use-package toc-org
+    :hook (org-mode-hook . toc-org-enable))
+  (use-package org-bullets
+    :hook (org-mode-hook . org-bullets-mode))
+  (add-hook 'org-mode-hook 'org-indent-mode)
+#+END_SRC
+
+** Gruvbox Theme
+#+BEGIN_SRC emacs-lisp
+  (use-package gruvbox-theme
+    :init
+    (load-theme 'gruvbox-dark-soft t))
+#+END_SRC
+
+** Vterm
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm
+    :config
+    (setq vterm-max-scrollback 5000))
+#+END_SRC
+
+** Yasnippet
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :config
+    (yas-global-mode 1))
+#+END_SRC
