@@ -22,6 +22,7 @@
 
 * PACKAGE MANAGEMENT
 ** Configure Package Archives
+
 #+BEGIN_SRC emacs-lisp
   (require 'package)
   (setq package-archives
@@ -37,6 +38,7 @@
 
 * CORE EMACS SETTINGS
 ** Graphical User Interface
+
 #+BEGIN_SRC emacs-lisp
   (tool-bar-mode -1)
   (menu-bar-mode -1)
@@ -44,18 +46,21 @@
 #+END_SRC
 
 ** Line Numbers
+
 #+BEGIN_SRC emacs-lisp
   (global-display-line-numbers-mode 1)
 #+END_SRC
 
 ** Font
+
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
                       :family "JetBrains Mono"
-                      :height 140)
+                      :height 160)
 #+END_SRC
 
 ** Indentation
+
 #+BEGIN_SRC emacs-lisp
   (setq-default tab-width 2)
   (setq-default indent-tabs-mode nil)
@@ -63,6 +68,7 @@
 
 * FILE HANDLING
 ** Disable Auto-save and Backup
+
 #+BEGIN_SRC emacs-lisp
   (setq auto-save-default nil)
   (setq make-backup-files nil)
@@ -70,6 +76,7 @@
 
 * PACKAGE CONFIGURATIONS
 ** Org Mode
+
 #+BEGIN_SRC emacs-lisp
   (use-package toc-org
     :hook (org-mode-hook . toc-org-enable))
@@ -79,13 +86,15 @@
 #+END_SRC
 
 ** Gruvbox Theme
+
 #+BEGIN_SRC emacs-lisp
   (use-package gruvbox-theme
     :init
-    (load-theme 'gruvbox-dark-soft t))
+    (load-theme 'gruvbox-dark-medium t))
 #+END_SRC
 
 ** Vterm
+
 #+BEGIN_SRC emacs-lisp
   (use-package vterm
     :config
@@ -93,6 +102,7 @@
 #+END_SRC
 
 ** Yasnippet
+
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
     :config
