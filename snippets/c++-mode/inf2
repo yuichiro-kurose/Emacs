@@ -1,0 +1,3 @@
+# key: inf2
+# --
+const long long inf = LLONG_MAX / 2;
